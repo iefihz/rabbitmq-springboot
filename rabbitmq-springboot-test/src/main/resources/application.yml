@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: rabbitmq-springboot
+  rabbitmq:
+    host: 192.168.199.128
+    port: 5672
+    virtual-host: /he
+    username: he
+    password: 123
+    listener:
+      simple:
+        prefetch: 1     #此配置为work模式-公平分发的配置

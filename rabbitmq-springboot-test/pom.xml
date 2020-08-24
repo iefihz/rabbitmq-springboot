@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.iefihz</groupId>
+        <artifactId>rabbitmq-springboot</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+<!--        <relativePath/>-->      <!--子项目不要用这个，否则，找不到父类pom.xml-->
+    </parent>
+    <groupId>com.iefihz</groupId>
+    <artifactId>rabbitmq-springboot-test</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>rabbitmq-springboot-test</name>
+    <description>Demo project for Spring Boot</description>
+
+</project>

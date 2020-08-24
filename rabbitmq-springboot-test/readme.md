@@ -1,0 +1,3 @@
+RabbitMQ与SpringBoot整合
+
+使用单元测试方式测试消息生产者与消费者

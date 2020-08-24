@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iefihz.reliabledelivery.dao.BrokerMessageLogMapper" >
+
+    <resultMap id="baseResultMap" type="com.iefihz.reliabledelivery.entity.BrokerMessageLog" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="message" property="message" jdbcType="VARCHAR" />
+        <result column="try_count" property="tryCount" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="next_retry_time" property="nextRetryTime" jdbcType="DATE" />
+        <result column="create_time" property="createTime" jdbcType="DATE" />
+        <result column="update_time" property="updateTime" jdbcType="DATE" />
+    </resultMap>
+
+    <insert id="add" keyColumn="id" keyProperty="id" useGeneratedKeys="true" parameterType="brokerMessageLog">
+        INSERT INTO t_broker_message_log (
+        `id`,
+        `message`,
+        `try_count`,
+        `status`,
+        `next_retry_time`,
+        `create_time`,
+        `update_time`
+        ) VALUES (
+        #{id},
+        #{message},
+        #{tryCount},
+        #{status},
+        #{nextRetryTime},
+        #{createTime},
+        #{updateTime}
+        )
+    </insert>
+
+    <update id="updateStatus">
+        UPDATE t_broker_message_log SET
+        `status` = #{status},
+        `update_time` = #{updateTime}
+        WHERE id = #{id}
+    </update>
+
+    <select id="queryMessageOnSendingAndTimeout" resultMap="baseResultMap">
+        <![CDATA[
+        SELECT id, message, try_count, status, next_retry_time, create_time, update_time
+        FROM t_broker_message_log
+        WHERE `status` = '0' AND `next_retry_time` <= sysdate()
+        ]]>
+    </select>
+
+    <update id="update4ReSend">
+        UPDATE t_broker_message_log SET
+        try_count = try_count + 1,
+        update_time = #{updateTime}
+        WHERE id = #{id}
+    </update>
+</mapper>
